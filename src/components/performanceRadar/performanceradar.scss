@@ -1,0 +1,26 @@
+.radar-container {
+    background-color: #282D30;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.recharts-text {
+    font-size:10px;
+    fill: white;
+}
+.recharts-polar-grid-angle {
+    & line {
+        stroke:transparent;
+    }
+}
+.recharts-polar-angle-axis-ticks {
+    padding-bottom: 10px;
+    .recharts-polar-angle-axis-tick:nth-child(1) {
+        transform: translateY(-0.5rem)
+    }
+    .recharts-polar-angle-axis-tick:nth-child(4) {
+        transform: translateY(0.5rem)
+    }
+}

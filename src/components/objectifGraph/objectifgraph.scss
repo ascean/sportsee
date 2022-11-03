@@ -1,0 +1,36 @@
+.radial-container {
+    background-color:#FBFBFB;
+    border-radius: 5px;
+    position: relative;
+
+    h2 {
+        position: absolute;
+        font-size: 15px;
+        color: #20253A;
+        top: 20px;
+        left: 20px;
+    }
+    
+    & .recharts-wrapper {
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+    & .recharts-legend-wrapper {
+        display: flex;
+        margin: 0 auto;
+
+        .objectif-text {
+            text-align: center;
+            line-height: 26px;
+
+            .objectif-percentage {
+                font-size: 26px;
+                font-weight: bold;
+            }
+            .objectif-label {
+                font-size: 16px;
+            }
+        }
+       
+    }
+}

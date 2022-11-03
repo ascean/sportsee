@@ -1,0 +1,63 @@
+.activity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+
+    & h2 {
+        position: absolute;
+        font-size: 15px;
+        color: #20253A;
+    }
+
+    .recharts-default-legend {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+    .recharts-legend-item {
+        margin-right: 40px;
+        display: flex!important;
+        align-items: center;
+        gap: 5px;
+    }
+    .recharts-legend-item-text {
+        color: #74798C!important;
+    }
+
+    .recharts-rectangle{
+        border-radius: 10px;
+    }
+
+    .recharts-cartesian-grid-vertical > line {
+        stroke:transparent;
+    }
+    .recharts-cartesian-grid-horizontal > line {
+        stroke-dasharray: "2 2";
+        &:first-child {
+            stroke-dasharray: none;
+        }
+    }
+    
+    .recharts-cartesian-axis-tick > line {
+        stroke:transparent;
+    }
+    .recharts-cartesian-axis-tick > text {
+        stroke:#9B9EAC;
+        stroke-width: 0.3;
+        fill: none;
+    }
+    .custom-tooltip-activity {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: red;
+        color: white;
+        padding: 10px;
+        font-size: 7px;
+    }
+    
+}

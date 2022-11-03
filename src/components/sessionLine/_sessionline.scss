@@ -1,0 +1,36 @@
+.session-container {
+    width: 100%;
+    height: 260px;
+    background-color: #FF0000;
+    border-radius: 5px;
+    padding-top: 20px;
+
+    .xAxis {
+        & line {
+            stroke: transparent;
+        }
+    }
+
+    .recharts-legend-wrapper {
+        margin-left: 10px;
+        line-height: 24px;
+        font-size: 15px;
+    }
+
+    .recharts-layer .recharts-cartesian-axis-tick text tspan {
+        fill: #fff;
+        opacity: 0.5;
+    }
+
+    .custom-tooltip-session {
+        background-color: white;
+        padding: 10px;
+
+        & .label {
+            font-size: 8px;
+            font-weight: bold;
+            color: black;
+
+        }
+    }
+}

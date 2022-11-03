@@ -1,0 +1,29 @@
+.header-container {
+    background-color: black;
+    padding: 10px 80px 10px 28px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    //width: 100vh;
+
+    & ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        & .logo {
+            background-image: url('../../assets/images/logo.png');
+            background-position: center;
+            background-size: cover;
+            border-radius: 25px;
+            width: 200px;
+        }
+        
+        & li {
+            font-size: 24px;
+            color: white;
+        }
+        
+    }
+}
