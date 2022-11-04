@@ -10,7 +10,7 @@ import {
 
 
 const SessionLine = (props) => {
-    const data = props.sessionDatas[0].sessions;
+    const data = props.sessionDatas.sessions;
     const renderLegend = () => "Durée moyenne des sessions";
     
     const CustomTooltip = ({ active, payload }) => {

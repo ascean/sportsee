@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const ActivityBar = (props) => {
-    const datas = props.activityDatas[0].sessions;
+    const datas = props.activityDatas.sessions;
     datas.map((data, index) => (data.day = index + 1));
 
     const CustomTooltip = ({ active, payload }) => {

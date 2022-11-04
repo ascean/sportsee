@@ -1,138 +1,207 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ActivityBar from "../../components/activityBar/ActivityBar";
 import ConsumBar from "../../components/consumBar/ConsumBar";
+import ObjectifGraph from "../../components/objectifGraph/ObjectifGraph";
 import PerformanceRadar from "../../components/performanceRadar/PerformanceRadar";
 import SessionLine from "../../components/sessionLine/SessionLine";
+import UserInfos from "../../components/userInfos/UserInfos";
 import VerticalBar from "../../components/verticalBar/VerticalBar";
-import ObjectifGraph from "../../components/objectifGraph/ObjectifGraph";
-var datasUser = require("../../assets/datas/data");
+import {
+    getUserInfos,
+    getUserActivity,
+    getUserSession,
+    getUserPerformance,
+} from "../../services/services";
 
-// const USER_AVERAGE_SESSIONS = datasUser.USER_AVERAGE_SESSIONS;
-const USER_ID = 12;
-
-const USER_MAIN_DATA = datasUser.USER_MAIN_DATA.filter(
-    (element) => element.id === USER_ID
-);
-const USER_SESSION = datasUser.USER_AVERAGE_SESSIONS.filter(
-    (element) => element.userId === USER_ID
-);
-const USER_ACTIVITY = datasUser.USER_ACTIVITY.filter(
-    (element) => element.userId === USER_ID
-);
-const USER_PERFORMANCE = datasUser.USER_PERFORMANCE.filter(
-    (element) => element.userId === USER_ID
-);
-
-const dayLetter = ["L", "M", "M", "J", "V", "S", "D"];
-USER_SESSION[0].sessions.forEach((data) => {
-    data.day = dayLetter[data.day-1];
-});
-
-
-    
 const User = () => {
+    const [isLoadingUser, setIsLoadingUser] = useState(true);
+    const [isLoadingActivity, setIsLoadingActivity] = useState(true);
+    const [isLoadingSession, setIsLoadingSession] = useState(true);
+    const [isLoadingPerformance, setIsLoadingPerformance] = useState(true);
+    const [userMainDatas, setUserMainDatas] = useState(null);
+    const [activityDatas, setActivityDatas] = useState(null);
+    const [sessionDatas, setSessionDatas] = useState(null);
+    const [performanceDatas, setPerformanceDatas] = useState(null);
+    const [caloryDatas, setCaloryDatas] = useState(null);
+    const [proteinDatas, setProteinDatas] = useState(null);
+    const [glucidDatas, setGlucidDatas] = useState(null);
+    const [lipidDatas, setLipidDatas] = useState(null);
 
-    const constructCategoryDatas = (i) => {
-        let objectCategory = {}
-        let countDatas = Object.values(USER_MAIN_DATA[0].keyData)
-        switch (i) {
-            case 0:
-                objectCategory= {
-                    "key": "calorie",
-                    "label":"Calories",
-                    "unit": "kCal",
-                    "img": `/icons/calorie.png`,
-                    "value": countDatas[i],
-                    "class": "calorie-icon"
-                }
-                break;
-            case 1:
-                objectCategory= {
-                    "key": "protein",
-                    "label":"Protéines",
-                    "unit": "g",
-                    "img": `/icons/protein.png`,
-                    "value": countDatas[i],
-                    "class": "protein-icon"
-                }
-                break;
-            case 2:
-                objectCategory= {
-                    "key": "carbohydrate",
-                    "label":"Glucides",
-                    "unit": "g",
-                    "img": `/icons/carbohydrate.png`,
-                    "value": countDatas[i],
-                    "class": "glucid-icon"
-                }
-                break;
-            case 3:
-                objectCategory= {
-                    "key": "calorie",
-                    "label":"Lipides",
-                    "unit": "g",
-                    "img": `/icons/lipid.png`,
-                    "value": countDatas[i],
-                    "class": "lipid-icon"
-                }
-                break;
-        
-            default:
-                break;
+    useEffect(() => {
+        getMainData();
+        getActivityData();
+        getSessionData();
+        getPerformanceData();
+    }, []);
+
+    const getMainData = async () => {
+        const data = await getUserInfos(18);
+        setUserMainDatas(data);
+        setIsLoadingUser(false);
+
+        createCategory(data);
+
+        controlScoreLabel(data);
+    };
+
+    const controlScoreLabel = (data) => {
+        if ("score" in data) {
+            data.todayScore = data.score;
+            delete data.score;
         }
-        return objectCategory
+    };
+
+    const getActivityData = async () => {
+        const data = await getUserActivity(12);
+        setActivityDatas(data);
+        setIsLoadingActivity(false);
+    };
+
+    const getSessionData = async () => {
+        const data = await getUserSession(12);
+
+        const dayLetter = ["L", "M", "M", "J", "V", "S", "D"];
+        data.sessions.forEach((session) => {
+            session.day = dayLetter[session.day - 1];
+        });
+
+        setSessionDatas(data);
+        setIsLoadingSession(false);
+    };
+    const getPerformanceData = async () => {
+        const data = await getUserPerformance(12);
+        setPerformanceDatas(data);
+        setIsLoadingPerformance(false);
+    };
+
+    class Category {
+        constructor(key, label, unit, img, count, classCategory) {
+            this.key = key;
+            this.label = label;
+            this.unit = unit;
+            this.img = img;
+            this.count = count;
+            this.classCategory = classCategory;
+        }
     }
-    
+
+    const createCategory = (data) => {
+        setCaloryDatas(
+            new Category(
+                "calorie",
+                "Calories",
+                "kCal",
+                `/icons/calorie.png`,
+                data.keyData.calorieCount,
+                "calorie-icon"
+            )
+        );
+        setProteinDatas(
+            new Category(
+                "protein",
+                "Protéines",
+                "g",
+                `/icons/protein.png`,
+                data.keyData.proteinCount,
+                "protein-icon"
+            )
+        );
+        setGlucidDatas(
+            new Category(
+                "carbohydrate",
+                "Glucides",
+                "g",
+                `/icons/carbohydrate.png`,
+                data.keyData.carbohydrateCount,
+                "glucid-icon"
+            )
+        );
+        setLipidDatas(
+            new Category(
+                "lipid",
+                "Lipides",
+                "g",
+                `/icons/lipid.png`,
+                data.keyData.lipidCount,
+                "lipid-icon"
+            )
+        );
+    };
+
     return (
-            <main>
-                <VerticalBar />
-                <div className="main-content">
-                    <section className="user-infos">
-                        <h1>
-                            <span>Bonjour </span>
-                            <span className="red">
-                                {USER_MAIN_DATA[0].userInfos.firstName}
-                            </span>
-                        </h1>
-                        <p className="message">
-                            Félicitations ! Vous avez explosé vos objectifs hier
-                            👏
-                        </p>
-                    </section>
-                    <section className="recharts-container">
-                        <article className="left-container">
-                            <div className="activity-container">
-                                
-                                <ActivityBar activityDatas={USER_ACTIVITY} />
+        <main>
+            <VerticalBar />
+            <div className="main-content">
+                {isLoadingUser ? (
+                    "Loading"
+                ) : (
+                    <UserInfos userDatas={userMainDatas} />
+                )}
+
+                <section className="recharts-container">
+                    <article className="left-container">
+                        <div className="activity-container">
+                            {isLoadingActivity ? (
+                                "Loading"
+                            ) : (
+                                <ActivityBar activityDatas={activityDatas} />
+                            )}
+                        </div>
+                        <div className="bottom-container">
+                            <div className="line-container">
+                                {isLoadingSession ? (
+                                    "Loading"
+                                ) : (
+                                    <SessionLine sessionDatas={sessionDatas} />
+                                )}
                             </div>
-                            <div className="bottom-container">
-                                <div className="line-container">
-                                    <SessionLine sessionDatas={USER_SESSION} />
-                                </div>
-                                <div className="radar-container">
+                            <div className="radar-container">
+                                {isLoadingPerformance ? (
+                                    "Loading"
+                                ) : (
                                     <PerformanceRadar
-                                        performanceDatas={USER_PERFORMANCE[0]}
+                                        performanceDatas={performanceDatas}
                                     />
-                                </div>
-                                <div className="radial-container">
-                                    <ObjectifGraph
-                                        objectifDatas={USER_MAIN_DATA[0]}
-                                    />
-                                </div>
+                                )}
                             </div>
-                        </article>
+                            <div className="radial-container">
+                                {isLoadingUser ? (
+                                    "Loading"
+                                ) : (
+                                    <ObjectifGraph
+                                        objectifDatas={userMainDatas}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </article>
                     <article className="right-container">
                         <div className="consumbar-container">
-                            
-                            <ConsumBar consumerData={constructCategoryDatas(0)}/>
-                            <ConsumBar consumerData={constructCategoryDatas(1)}/>
-                            <ConsumBar consumerData={constructCategoryDatas(2)}/>
-                            <ConsumBar consumerData={constructCategoryDatas(3)}/>
-                    </div>
-                        </article>
-                    </section>
-                </div>
-            </main>
+                            {isLoadingUser ? (
+                                "Loading"
+                            ) : (
+                                <ConsumBar consumerData={caloryDatas} />
+                            )}
+                            {isLoadingUser ? (
+                                "Loading"
+                            ) : (
+                                <ConsumBar consumerData={proteinDatas} />
+                            )}
+                            {isLoadingUser ? (
+                                "Loading"
+                            ) : (
+                                <ConsumBar consumerData={glucidDatas} />
+                            )}
+                            {isLoadingUser ? (
+                                "Loading"
+                            ) : (
+                                <ConsumBar consumerData={lipidDatas} />
+                            )}
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
     );
 };
 

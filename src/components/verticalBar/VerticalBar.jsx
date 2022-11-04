@@ -3,48 +3,24 @@ import VerticalButton from './VerticalButton';
 
 const VerticalBar = () => {
 
-    const constructButton = (i) => {
-        let objectButtons = {};
-        switch (i) {
-            case 0:
-                objectButtons = {
-                    alt: "yoga",
-                    img: "/images/yoga.png",
-                };
-                break;
-            case 1:
-                objectButtons = {
-                    alt: "natation",
-                    img: "/images/natation.png",
-                };
-                break;
-            case 2:
-                objectButtons = {
-                    alt: "cyclisme",
-                    img: "/images/cyclisme.png",
-                };
-                break;
-            case 3:
-                objectButtons = {
-                    alt: "halterophilie",
-                    img: "/images/halterophilie.png",
-                };
-                break;
-
-            default:
-                break;
+    class Button {
+        constructor(alt, img) {
+            this.alt = alt;
+            this.img = img;
         }
-        return objectButtons;
+    }
+
+    const constructButton = (type) => {
+        return (new Button(type, "/images/"+type+".png"))
     };
-    
 
     return (
         <section className='bar-container'>
             <ul>
-                <VerticalButton buttonDatas={constructButton(0)}/>
-                <VerticalButton buttonDatas={constructButton(1)}/>
-                <VerticalButton buttonDatas={constructButton(2)}/>
-                <VerticalButton buttonDatas={constructButton(3)}/>
+                <VerticalButton buttonDatas={constructButton("yoga")}/>
+                <VerticalButton buttonDatas={constructButton("natation")}/>
+                <VerticalButton buttonDatas={constructButton("cyclisme")}/>
+                <VerticalButton buttonDatas={constructButton("halterophilie")}/>
             </ul>
             <p>
                 Copyright, SportSee 2020
