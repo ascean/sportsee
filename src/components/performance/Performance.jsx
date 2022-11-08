@@ -8,7 +8,7 @@ import {
 } from "recharts";
 
 
-const PerformanceRadar = (props) => {
+const Performance = (props) => {
     const datas = props.performanceDatas;
 
     //array des types de performances
@@ -24,8 +24,6 @@ const PerformanceRadar = (props) => {
         let element = datasKind[i].kind
         datasKind[i]["label"] = firstLettertoUpperCase[element-1]
     }
-
-
 
     return (
 
@@ -51,4 +49,4 @@ const PerformanceRadar = (props) => {
     );
 };
 
-export default PerformanceRadar;
+export default Performance;

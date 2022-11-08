@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ActivityBar from "../../components/activityBar/ActivityBar";
-import ConsumBar from "../../components/consumBar/ConsumBar";
-import ObjectifGraph from "../../components/objectifGraph/ObjectifGraph";
-import PerformanceRadar from "../../components/performanceRadar/PerformanceRadar";
-import SessionLine from "../../components/sessionLine/SessionLine";
+import Activity from "../../components/activity/Activity";
+import Consum from "../../components/consum/Consum";
+import Objectif from "../../components/objectif/Objectif";
+import Performance from "../../components/performance/Performance";
+import Session from "../../components/session/Session";
 import UserInfos from "../../components/userInfos/UserInfos";
 import VerticalBar from "../../components/verticalBar/VerticalBar";
+import { Category } from "../../models/categoryModel";
+import { UserActivity } from "../../models/userActivityModel";
+import { UserMainData } from "../../models/userMainDataModel";
+import { UserAverageSession } from "../../models/userAverageSessionModel";
 import {
     getUserInfos,
     getUserActivity,
@@ -28,62 +32,46 @@ const User = () => {
     const [lipidDatas, setLipidDatas] = useState(null);
 
     useEffect(() => {
-        getMainData();
-        getActivityData();
-        getSessionData();
-        getPerformanceData();
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+          });
+        let value = params.user_id ?? 12
+        getMainData(value);
+        getActivityData(value);
+        getSessionData(value);
+        getPerformanceData(value);
     }, []);
 
-    const getMainData = async () => {
-        const data = await getUserInfos(18);
+    const getMainData = async (userId) => {
+        const dataFromFetch = await getUserInfos(userId);
+        const data = new UserMainData(dataFromFetch)
         setUserMainDatas(data);
         setIsLoadingUser(false);
-
         createCategory(data);
-
-        controlScoreLabel(data);
     };
 
-    const controlScoreLabel = (data) => {
-        if ("score" in data) {
-            data.todayScore = data.score;
-            delete data.score;
-        }
-    };
 
-    const getActivityData = async () => {
-        const data = await getUserActivity(12);
+    const getActivityData = async (userId) => {
+        const dataFromFetch = await getUserActivity(userId);
+        const data = new UserActivity(dataFromFetch)
         setActivityDatas(data);
         setIsLoadingActivity(false);
     };
 
-    const getSessionData = async () => {
-        const data = await getUserSession(12);
-
-        const dayLetter = ["L", "M", "M", "J", "V", "S", "D"];
-        data.sessions.forEach((session) => {
-            session.day = dayLetter[session.day - 1];
-        });
-
+    const getSessionData = async (userId) => {
+        const dataFromFetch = await getUserSession(userId);
+        const data = new UserAverageSession(dataFromFetch)
         setSessionDatas(data);
         setIsLoadingSession(false);
     };
-    const getPerformanceData = async () => {
-        const data = await getUserPerformance(12);
-        setPerformanceDatas(data);
+
+    const getPerformanceData = async (userId) => {
+        const dataFromFetch = await getUserPerformance(userId);
+        console.log(dataFromFetch);
+
+        setPerformanceDatas(dataFromFetch);
         setIsLoadingPerformance(false);
     };
-
-    class Category {
-        constructor(key, label, unit, img, count, classCategory) {
-            this.key = key;
-            this.label = label;
-            this.unit = unit;
-            this.img = img;
-            this.count = count;
-            this.classCategory = classCategory;
-        }
-    }
 
     const createCategory = (data) => {
         setCaloryDatas(
@@ -144,7 +132,7 @@ const User = () => {
                             {isLoadingActivity ? (
                                 "Loading"
                             ) : (
-                                <ActivityBar activityDatas={activityDatas} />
+                                <Activity activityDatas={activityDatas} />
                             )}
                         </div>
                         <div className="bottom-container">
@@ -152,14 +140,14 @@ const User = () => {
                                 {isLoadingSession ? (
                                     "Loading"
                                 ) : (
-                                    <SessionLine sessionDatas={sessionDatas} />
+                                    <Session sessionDatas={sessionDatas} />
                                 )}
                             </div>
                             <div className="radar-container">
                                 {isLoadingPerformance ? (
                                     "Loading"
                                 ) : (
-                                    <PerformanceRadar
+                                    <Performance
                                         performanceDatas={performanceDatas}
                                     />
                                 )}
@@ -168,7 +156,7 @@ const User = () => {
                                 {isLoadingUser ? (
                                     "Loading"
                                 ) : (
-                                    <ObjectifGraph
+                                    <Objectif
                                         objectifDatas={userMainDatas}
                                     />
                                 )}
@@ -176,26 +164,26 @@ const User = () => {
                         </div>
                     </article>
                     <article className="right-container">
-                        <div className="consumbar-container">
+                        <div className="consum-container">
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <ConsumBar consumerData={caloryDatas} />
+                                <Consum consumerData={caloryDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <ConsumBar consumerData={proteinDatas} />
+                                <Consum consumerData={proteinDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <ConsumBar consumerData={glucidDatas} />
+                                <Consum consumerData={glucidDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <ConsumBar consumerData={lipidDatas} />
+                                <Consum consumerData={lipidDatas} />
                             )}
                         </div>
                     </article>

@@ -9,8 +9,9 @@ import {
 } from "recharts";
 
 
-const SessionLine = (props) => {
+const Session = (props) => {
     const data = props.sessionDatas.sessions;
+    console.log("555",data);
     const renderLegend = () => "Durée moyenne des sessions";
     
     const CustomTooltip = ({ active, payload }) => {
@@ -109,4 +110,4 @@ const SessionLine = (props) => {
         </div>
     );
 };
-export default SessionLine;
+export default Session;

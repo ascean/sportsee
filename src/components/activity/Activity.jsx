@@ -10,12 +10,13 @@ import {
     Rectangle,
 } from "recharts";
 
-const ActivityBar = (props) => {
+const Activity = (props) => {
     const datas = props.activityDatas.sessions;
     datas.map((data, index) => (data.day = index + 1));
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
+            console.log(payload);
             return (
                 <div className="custom-tooltip-activity">
                     <p className="label">{`${payload[0].value}kg`}</p>
@@ -40,7 +41,6 @@ const ActivityBar = (props) => {
                     left: 0,
                     bottom: 0,
                 }}
-                barCategoryGap={"30%"}
                 barGap={"12%"}
                 barSize={7}
             >
@@ -82,4 +82,4 @@ const ActivityBar = (props) => {
     );
 };
 
-export default ActivityBar;
+export default Activity;

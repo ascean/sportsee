@@ -1,9 +1,11 @@
 @import 'settings';
 @import '../pages/user/user';
+@import '../pages/error/error';
 @import '../components/header/header';
 @import '../components/verticalbar/verticalbar';
-@import '../components/consumbar/consumbar';
-@import '../components/sessionline/sessionline';
-@import '../components/activitybar/activitybar';
-@import '../components/performanceRadar/performanceradar.scss';
-@import '../components/objectifgraph/objectifgraph.scss';
+@import '../components/consum/consum';
+@import '../components/session/session';
+@import '../components/activity/activity';
+@import '../components/performance/performance.scss';
+@import '../components/objectif/objectif.scss';
+@import '../components/userInfos/userinfos';

@@ -1,20 +1,20 @@
 import React from "react";
 
-const ConsumBar = (props) => {
+const Consum = (props) => {
     const consumerData = props.consumerData;
     return (
-        <div className="consumbar-item">
+        <div className="consum-item">
             <div className={`icon ${consumerData.classCategory}`}>
                 <img src={consumerData.img} alt="" />
             </div>
-            <div className="consumbar-values">
-                <p className="consumbar-data">
+            <div className="consum-values">
+                <p className="consum-data">
                     {consumerData.count} {consumerData.unit}
                 </p>
-                <p className="consumbar-label">{consumerData.label}</p>
+                <p className="consum-label">{consumerData.label}</p>
             </div>
         </div>
     );
 };
 
-export default ConsumBar;
+export default Consum;

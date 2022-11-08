@@ -5,7 +5,7 @@ import {
     RadialBarChart,
 } from "recharts";
 
-const ObjectifGraph = (props) => {
+const Objectif = (props) => {
     const score = props.objectifDatas.todayScore*100
     const objectifDatas = Math.round(props.objectifDatas.todayScore* 360);
     const endAngle = 90 + objectifDatas
@@ -54,4 +54,4 @@ const ObjectifGraph = (props) => {
     );
 };
 
-export default ObjectifGraph;
+export default Objectif;
