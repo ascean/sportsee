@@ -1,11 +1,11 @@
-.consum-container {
+.keydata-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     
     
-    .consum-item {
+    .keydata-item {
         display: flex;
         align-items: center;
         background-color: #FBFBFB;
@@ -36,12 +36,12 @@
             padding: 20px;
         }
 
-        .consum-values {
-            .consum-data {
+        .keydata-values {
+            .keydata-data {
                 font-size: 16px;
                 font-weight: bold;
             }
-            .consum-label {
+            .keydata-label {
 
                 font-size: 12px;
             }

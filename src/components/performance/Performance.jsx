@@ -7,23 +7,26 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+/**
+ * Display RadarChart with performances
+ * @param {Object} performanceDatas from USER_PERFORMANCE
+ * @returns HTMLElement
+ */
+const Performance = ({performanceDatas}) => {
 
-const Performance = (props) => {
-    const datas = props.performanceDatas;
+    //example of performanceDatas
+    // userId : 12
+    // data [ {value: 80, kind: 1, label: 'Cardio'}, { value: 120, kind: 2, label: 'Energy' }, ...]
+    // kind ["Cardio", "Energy",...]
 
-    //array des types de performances
-    const kindLabel = Object.values(props.performanceDatas.kind)
-    //1ère lettre en majuscule
-    const firstLettertoUpperCase = kindLabel.map((element => {
-        return (element + '').charAt(0).toUpperCase() + element.substr(1)
-    }))    
-
-    //ajout d'une valeur à l'objet datas avec la performance en lettres
-    const datasKind = datas.data
-    for (let i = 0; i < datasKind.length; i++) {
-        let element = datasKind[i].kind
-        datasKind[i]["label"] = firstLettertoUpperCase[element-1]
+    //add  key/value "label" : label in data
+    const kindDatas = performanceDatas.data
+    for (let i = 0; i < kindDatas.length; i++) {
+        kindDatas[i]["label"] = performanceDatas.kind[i]
     }
+
+    //example of performanceDatas.data
+    //data [ {value: 80, kind: 1, label: 'Cardio'}, { value: 120, kind: 2, label: 'Energy' },... ]
 
     return (
 
@@ -32,9 +35,7 @@ const Performance = (props) => {
                 cx={'50%'}
                 cy={'50%'}
                 outerRadius={60}
-                data={datas.data}
-                //width={'50%'}
-                //height={230}
+                data={performanceDatas.data}
                 
             >
                 <PolarGrid />

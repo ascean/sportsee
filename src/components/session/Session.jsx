@@ -8,10 +8,14 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+/**
+ * LineChart with  sessions length datas
+ * @param {Object}  sessionDatas from USER_AVERAGE_SESSIONS.sessions 
+ * @returns HTMLElement
+ */
+const Session = ({sessionDatas}) => {
+    const [opacity, setOpacity] = useState({});
 
-const Session = (props) => {
-    const data = props.sessionDatas.sessions;
-    console.log("555",data);
     const renderLegend = () => "Durée moyenne des sessions";
     
     const CustomTooltip = ({ active, payload }) => {
@@ -26,7 +30,6 @@ const Session = (props) => {
         return null;
     };
 
-    const [opacity, setOpacity] = useState({});
 
     const handleMouseEnter = useCallback(
         (changeOpacity) => {
@@ -44,6 +47,7 @@ const Session = (props) => {
         [opacity, setOpacity]
     );
     let mouseXpercentage
+    
     return (
         <div className="session-container">
             <ResponsiveContainer width="100%" height="90%">
@@ -51,7 +55,7 @@ const Session = (props) => {
                 <LineChart
                     width={250}
                     height={150}
-                    data={data}
+                    data={sessionDatas}
                     style={{ color: "#FF8181" }}
                     margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                     

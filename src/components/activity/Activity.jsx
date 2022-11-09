@@ -10,13 +10,18 @@ import {
     Rectangle,
 } from "recharts";
 
-const Activity = (props) => {
-    const datas = props.activityDatas.sessions;
-    datas.map((data, index) => (data.day = index + 1));
+/**
+ * Dispkay BarChart with activity datas
+ * @param {Object} USER_ACTIVITY.sessions 
+ * @returns HTMLElement
+ */
+const Activity = ({ activityDatas }) => {
+    
+    //in xaxis, display number for each day instead of the date
+    activityDatas.map((data, index) => (data.day = index + 1));
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
-            console.log(payload);
             return (
                 <div className="custom-tooltip-activity">
                     <p className="label">{`${payload[0].value}kg`}</p>
@@ -24,7 +29,6 @@ const Activity = (props) => {
                 </div>
             );
         }
-
         return null;
     };
 
@@ -34,7 +38,7 @@ const Activity = (props) => {
             <BarChart
                 width={600}
                 height={220}
-                data={datas}
+                data={activityDatas}
                 margin={{
                     top: 0,
                     right: 0,

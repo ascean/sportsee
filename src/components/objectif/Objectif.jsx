@@ -5,14 +5,25 @@ import {
     RadialBarChart,
 } from "recharts";
 
-const Objectif = (props) => {
-    const score = props.objectifDatas.todayScore*100
-    const objectifDatas = Math.round(props.objectifDatas.todayScore* 360);
-    const endAngle = 90 + objectifDatas
-    const data = [{ todayScore: objectifDatas , fill:"red"}];
-    
-    const renderLegend = () => {
+/**
+ * RadialBarChart with USER_MAIN_DATA.todayScore
+ * @param {Object} todayScore 
+ * @returns HTMLElement 
+ */
+const Objectif = ({ todayScore }) => {
 
+    //percentage display
+    const score = todayScore * 100
+
+    //red part cicular
+    const circleScore = Math.round(todayScore * 360);
+    
+    //length of red part
+    const endAngle = 90 + circleScore
+    
+    const dataScore = [{ todayScore: circleScore, fill: "red" }];
+
+    const renderLegend = () => {
         return (
             <div className="objectif-text">
                 <p className="objectif-percentage">{score}%</p>
@@ -20,7 +31,6 @@ const Objectif = (props) => {
             </div>
         );
     }
-
 
     return (
         <div>
@@ -30,7 +40,7 @@ const Objectif = (props) => {
                 height={200}
                 innerRadius="80%"
                 outerRadius="90%"
-                data={data}
+                data={dataScore}
                 startAngle={90}
                 endAngle={endAngle}
             >
@@ -47,8 +57,6 @@ const Objectif = (props) => {
                     cornerRadius={30 / 2}
                 />
                 
-                {/* <Tooltip /> */}
-
             </RadialBarChart>
         </div>
     );

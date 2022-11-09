@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Activity from "../../components/activity/Activity";
-import Consum from "../../components/consum/Consum";
 import Objectif from "../../components/objectif/Objectif";
 import Performance from "../../components/performance/Performance";
 import Session from "../../components/session/Session";
 import UserInfos from "../../components/userInfos/UserInfos";
 import VerticalBar from "../../components/verticalBar/VerticalBar";
-import { Category } from "../../models/categoryModel";
+import { FormattedKeyData } from "../../models/formattedKeyDataModel";
 import { UserActivity } from "../../models/userActivityModel";
 import { UserMainData } from "../../models/userMainDataModel";
 import { UserAverageSession } from "../../models/userAverageSessionModel";
@@ -16,6 +15,8 @@ import {
     getUserSession,
     getUserPerformance,
 } from "../../services/services";
+import KeyData from "../../components/keyData/KeyData";
+import { UserPerformance } from "../../models/userPerformanceModel";
 
 const User = () => {
     const [isLoadingUser, setIsLoadingUser] = useState(true);
@@ -32,85 +33,108 @@ const User = () => {
     const [lipidDatas, setLipidDatas] = useState(null);
 
     useEffect(() => {
+        //URL datas gestion
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
-          });
-        let value = params.user_id ?? 12
+        });
+        //default value if null
+        let value = params.user_id ?? 12;
+
         getMainData(value);
         getActivityData(value);
         getSessionData(value);
         getPerformanceData(value);
     }, []);
 
+    /**
+     * get datas from API / USER_MAIN_DATA
+     * @param {integer} userId User code
+     */
     const getMainData = async (userId) => {
         const dataFromFetch = await getUserInfos(userId);
-        const data = new UserMainData(dataFromFetch)
+        const data = new UserMainData(dataFromFetch);
         setUserMainDatas(data);
         setIsLoadingUser(false);
-        createCategory(data);
+        formatKeyData(data.keyData);
     };
 
-
+    /**
+     * get datas from API / USER_ACTIVITY
+     * @param {integer} userId User code
+     */
     const getActivityData = async (userId) => {
         const dataFromFetch = await getUserActivity(userId);
-        const data = new UserActivity(dataFromFetch)
-        setActivityDatas(data);
+        const data = new UserActivity(dataFromFetch);
+        setActivityDatas(data.sessions);
         setIsLoadingActivity(false);
     };
 
+    /**
+     * get datas from API / USER_AVERAGE_SESSIONS
+     * @param {integer} userId User code
+     */
     const getSessionData = async (userId) => {
         const dataFromFetch = await getUserSession(userId);
-        const data = new UserAverageSession(dataFromFetch)
-        setSessionDatas(data);
+        const data = new UserAverageSession(dataFromFetch);
+        console.log(data);
+
+        setSessionDatas(data.sessions);
         setIsLoadingSession(false);
     };
 
+    /**
+     * get datas from APi - USER_PERFORMANCE
+     * @param {integer} userId User code
+     */
     const getPerformanceData = async (userId) => {
         const dataFromFetch = await getUserPerformance(userId);
-        console.log(dataFromFetch);
-
-        setPerformanceDatas(dataFromFetch);
+        const data = new UserPerformance(dataFromFetch);
+        setPerformanceDatas(data);
         setIsLoadingPerformance(false);
     };
 
-    const createCategory = (data) => {
+    /**
+     * Format datas for right bar (calory, protein...) using state
+     * @param {Object} data USER_MAIN_DATAS.keyData
+     */
+    const formatKeyData = (data) => {
         setCaloryDatas(
-            new Category(
+            new FormattedKeyData(
                 "calorie",
                 "Calories",
                 "kCal",
                 `/icons/calorie.png`,
-                data.keyData.calorieCount,
+                data.calorieCount,
                 "calorie-icon"
             )
         );
         setProteinDatas(
-            new Category(
+            new FormattedKeyData(
                 "protein",
                 "Protéines",
                 "g",
                 `/icons/protein.png`,
-                data.keyData.proteinCount,
+                data.proteinCount,
                 "protein-icon"
             )
         );
         setGlucidDatas(
-            new Category(
+            new FormattedKeyData(
                 "carbohydrate",
                 "Glucides",
                 "g",
                 `/icons/carbohydrate.png`,
-                data.keyData.carbohydrateCount,
+                data.carbohydrateCount,
                 "glucid-icon"
             )
         );
         setLipidDatas(
-            new Category(
+            new FormattedKeyData(
                 "lipid",
                 "Lipides",
                 "g",
                 `/icons/lipid.png`,
-                data.keyData.lipidCount,
+                data.lipidCount,
                 "lipid-icon"
             )
         );
@@ -123,7 +147,7 @@ const User = () => {
                 {isLoadingUser ? (
                     "Loading"
                 ) : (
-                    <UserInfos userDatas={userMainDatas} />
+                    <UserInfos firstName={userMainDatas.userInfos.firstName} />
                 )}
 
                 <section className="recharts-container">
@@ -157,33 +181,33 @@ const User = () => {
                                     "Loading"
                                 ) : (
                                     <Objectif
-                                        objectifDatas={userMainDatas}
+                                        todayScore={userMainDatas.todayScore}
                                     />
                                 )}
                             </div>
                         </div>
                     </article>
                     <article className="right-container">
-                        <div className="consum-container">
+                        <div className="keydata-container">
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <Consum consumerData={caloryDatas} />
+                                <KeyData datas={caloryDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <Consum consumerData={proteinDatas} />
+                                <KeyData datas={proteinDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <Consum consumerData={glucidDatas} />
+                                <KeyData datas={glucidDatas} />
                             )}
                             {isLoadingUser ? (
                                 "Loading"
                             ) : (
-                                <Consum consumerData={lipidDatas} />
+                                <KeyData datas={lipidDatas} />
                             )}
                         </div>
                     </article>

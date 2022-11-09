@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import logo from '../../assets/images/logo.png'; // Tell webpack this JS file uses this image
+import logo from '../../assets/images/logo.png'; 
 
+/**
+ * header navigation
+ * @returns HTMLElement
+ */
 const Header = () => {
     return (
         <section className='header-container'>
@@ -12,15 +16,15 @@ const Header = () => {
                     className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Accueil</li>
                 </NavLink>
-                <NavLink  to="/about"
+                <NavLink  to="/"
                     className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Profil</li>
                 </NavLink>
-                <NavLink  to="/about"
+                <NavLink  to="/"
                     className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Réglages</li>
                 </NavLink>
-                <NavLink  to="/about"
+                <NavLink  to="/"
                     className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Communauté</li>
                 </NavLink>
