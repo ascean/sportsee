@@ -1,70 +1,109 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sportsee
 
-## Available Scripts
+## General informations
+This project presents the 1st page of the Sportee application which will allow the user to follow the various elements relating to his sports coaching in the form of graphics.
 
-In the project directory, you can run:
+[App Screenshot](https://github.com/ascean/sportsee/blob/main/public/images/sportsee-screen.png)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
+- NodeJS (version 12.18 or more)
+- npm
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies and Dependencies
 
-### `npm test`
+- Javascript
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Sass (version 1.55)](https://sass-lang.com/)
 
-### `npm run build`
+- [Axios (version 1.1.3)](https://axios-http.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Prop-types (version 15.8.1)](https://www.npmjs.com/package/prop-types)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [React (version 18.2)](https://fr.reactjs.org/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [React-dom (version 6.4.2)](https://fr.reactjs.org/docs/react-dom.html) 
 
-### `npm run eject`
+- [React-scripts (version 5.0.1)](https://www.npmjs.com/package/react-scripts) 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [Recharts(version 2.1.15)](https://recharts.org/en-US/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Installation 
+#### BACKEND    
+    
+- Clone the project
 
-## Learn More
+```bash
+  git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Go to the project directory
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  cd P9-front-end-dashboard
+```
 
-### Code Splitting
+- Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+  npm install
+```
 
-### Analyzing the Bundle Size
+#### FRONTEND
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Clone this project
 
-### Making a Progressive Web App
+```bash
+  git clone https://github.com/ascean/sportsee.git
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Go to the project directory
 
-### Advanced Configuration
+```bash
+  cd sportsee
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Install dependencies
 
-### Deployment
+```bash
+  npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Run the project
+You need to run the backend AND the frontend
+#### BACKEND
+Start the server
 
-### `npm run build` fails to minify
+```bash
+  npm run start
+```
+It will be running on port 3000
+#### FRONTEND
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Start the server
+
+```bash
+  npm run start
+```
+To this question "Something is already running on port 3000. Would you like to run the app on another port instead? » (Y/n)", please answer Y
+
+Finally, open http://localhost:3001 to view the application in your browser.
+
+
+- Default datas :
+```bash
+  http://localhost:3001
+  or
+  http://localhost:3001/?user_id=12 
+```
+- Others datas :
+```bash
+  http://localhost:3001/?user_id=18
+```
+## Authors
+
+- Sandrine
+
