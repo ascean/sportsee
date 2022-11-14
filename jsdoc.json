@@ -13,11 +13,6 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "templates": {
-        "default": {
-            "staticFiles": {
-                "include": [ "./sportsee/public/images" ]
-            }
-        },
         "cleverLinks": false,
         "monospaceLinks": false
     },

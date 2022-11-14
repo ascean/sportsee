@@ -7,10 +7,6 @@ This project presents the first page of the Sportee application which will allow
 
 Minimum resolution : 1024 x 780px 
 
-## Screenshots
-
-![Sportsee](../public/images/sportsee-screen.png)
-
 ## Technologies and Dependencies
 
 - Javascript
@@ -34,7 +30,7 @@ Minimum resolution : 1024 x 780px
 ## Installation 
 #### BACKEND    
     
-- Clone the project
+- Clone this project
 
 ```bash
   git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git
@@ -104,11 +100,17 @@ Finally, open http://localhost:3001 to view the application in your browser. (30
   http://localhost:3001/?user_id=18
 ```
 
-##Document source code withJsDoc
-
-Installation: npm Jsdoc installation
-Not necessary if you have already perform a global install.
-Then, run the command npm run jsdoc
+## Document source code with JsDoc
+### Installation
+```bash
+  npm jsdoc
+```
+### Running
+```bash
+  npm run jsdoc
+```
+### Consulting
+Open the file : /docs/index.html
 
 ## Authors
 
