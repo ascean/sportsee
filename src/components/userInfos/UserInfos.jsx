@@ -1,9 +1,10 @@
 import React from "react";
 
 /**
- * Display message with user name
- * @param {Object} userDatas 
- * @returns HTMLElement
+ * Render message with user Firstname
+ * @param {String} firstName User firstname
+ * @returns {ReactElement} welcome message
+
  */
 const UserInfos = ({firstName}) => {
     return (

@@ -1,12 +1,19 @@
-import { Session } from "./sessionModel"
+import { SessionModel } from "./sessionModel"
 import PropTypes from "prop-types";
 
-/**
- * Model for USER_AVERAGE_SESSIONS
- * call Session model
- */
-export class UserAverageSession {
+export class UserAverageSessionModel {
+    /**
+     * Model for SessionGraph, 
+     * call SessionModel
+     * @param {Object} data USER_AVERAGE_SESSIONS
+     * @param {number} data.userId User code
+     * @param {Array.<{day:string, sessionsLength:number}>} data.sessions user data sessions
+     * @example
+     * { userId : 12 , [{ "day" : "M", "sessionLength": 23 }, { }, { } ...]
+}
+     */
     constructor(data) {
+        console.log("1",data);
         this.userId     = data.userId
         this.sessions   = []
         
@@ -14,13 +21,13 @@ export class UserAverageSession {
         for (let i = 0; i < data.sessions.length; i++) {
             const element   = data.sessions[i];
             element.day     = dayLetter[i];
-            let newSession  = new Session(element)
+            let newSession  = new SessionModel(element)
             this.sessions.push(newSession)
         }
     }
 }
 
-UserAverageSession.propTypes = {
+UserAverageSessionModel.propTypes = {
     userId:     PropTypes.number,
-    sessions:   PropTypes.instanceOf(Session),
+    sessions:   PropTypes.instanceOf(SessionModel),
 }

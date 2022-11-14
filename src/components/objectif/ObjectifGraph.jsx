@@ -6,11 +6,11 @@ import {
 } from "recharts";
 
 /**
- * RadialBarChart with USER_MAIN_DATA.todayScore
- * @param {Object} todayScore 
- * @returns HTMLElement 
+ * Generate RadialBarChart with USER_MAIN_DATA.todayScore
+ * @param {number} todayScore User objectif score
+ * @returns {ReactElement} RadialBarChart
  */
-const Objectif = ({ todayScore }) => {
+const ObjectifGraph = ({ todayScore }) => {
 
     //percentage display
     const score = todayScore * 100
@@ -23,6 +23,10 @@ const Objectif = ({ todayScore }) => {
     
     const dataScore = [{ todayScore: circleScore, fill: "red" }];
 
+    /**
+     * Construction of the legend to display on the graph
+     * @returns {ReactElement} legend to display
+     */
     const renderLegend = () => {
         return (
             <div className="objectif-text">
@@ -62,4 +66,4 @@ const Objectif = ({ todayScore }) => {
     );
 };
 
-export default Objectif;
+export default ObjectifGraph;

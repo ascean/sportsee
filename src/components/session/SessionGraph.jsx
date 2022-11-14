@@ -9,15 +9,24 @@ import {
 } from "recharts";
 
 /**
- * LineChart with  sessions length datas
- * @param {Object}  sessionDatas from USER_AVERAGE_SESSIONS.sessions 
- * @returns HTMLElement
+ * Generate LineChart with sessions length datas
+ * @param {Object} sessionDatas
+ * @param {number} sessionDatas.userId User code
+ * @param {Array.<{day:string, sessionLength:number}>} sessionDatas.sessions User data sessions (day, length)
+ * @returns {ReactElement} LineChart
  */
-const Session = ({sessionDatas}) => {
+const SessionGraph = ({sessionDatas}) => {
     const [opacity, setOpacity] = useState({});
 
     const renderLegend = () => "Durée moyenne des sessions";
     
+    /**
+     * Render tooltip on LineChart hover
+     * @param {Object} props
+     * @param {boolean} props.active
+     * @param {Array.<{value:number}>} props.payload
+     * @returns {ReactElement} 
+     */
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
@@ -30,7 +39,7 @@ const Session = ({sessionDatas}) => {
         return null;
     };
 
-
+    //hover effect on LineChart
     const handleMouseEnter = useCallback(
         (changeOpacity) => {
             const { dataKey } = changeOpacity;
@@ -114,4 +123,4 @@ const Session = ({sessionDatas}) => {
         </div>
     );
 };
-export default Session;
+export default SessionGraph;

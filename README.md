@@ -2,14 +2,14 @@
 # Sportsee
 
 ## General informations
-This project presents the 1st page of the Sportee application which will allow the user to follow the various elements relating to his sports coaching in the form of graphics.
 
-[App Screenshot](https://github.com/ascean/sportsee/blob/main/public/images/sportsee-screen.png)
+This project presents the first page of the Sportee application which will allow the user to follow the various elements relating to his sports coaching in the form of graphics.
 
+Minimum resolution : 1024 x 780px 
 
-## Prerequisites
-- NodeJS (version 12.18 or more)
-- npm
+## Screenshots
+
+![Sportsee](../public/images/sportsee-screen.png)
 
 ## Technologies and Dependencies
 
@@ -29,7 +29,7 @@ This project presents the 1st page of the Sportee application which will allow t
 
 - [Recharts(version 2.1.15)](https://recharts.org/en-US/)
 
-
+- [JsDoc (version 4.0)](https://jsdoc.app/)
 
 ## Installation 
 #### BACKEND    
@@ -73,7 +73,7 @@ This project presents the 1st page of the Sportee application which will allow t
 ```
 
 ## Run the project
-You need to run the backend AND the frontend
+You need to run first backend then frontend
 #### BACKEND
 Start the server
 
@@ -90,12 +90,12 @@ Start the server
 ```
 To this question "Something is already running on port 3000. Would you like to run the app on another port instead? » (Y/n)", please answer Y
 
-Finally, open http://localhost:3001 to view the application in your browser.
+Finally, open http://localhost:3001 to view the application in your browser. (3001 is your port number)
 
 
 - Default datas :
 ```bash
-  http://localhost:3001
+  http://localhost:3001 
   or
   http://localhost:3001/?user_id=12 
 ```
@@ -103,6 +103,13 @@ Finally, open http://localhost:3001 to view the application in your browser.
 ```bash
   http://localhost:3001/?user_id=18
 ```
+
+##Document source code withJsDoc
+
+Installation: npm Jsdoc installation
+Not necessary if you have already perform a global install.
+Then, run the command npm run jsdoc
+
 ## Authors
 
 - Sandrine

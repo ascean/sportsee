@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Activity from "../../components/activity/Activity";
-import Objectif from "../../components/objectif/Objectif";
-import Performance from "../../components/performance/Performance";
-import Session from "../../components/session/Session";
 import UserInfos from "../../components/userInfos/UserInfos";
 import VerticalBar from "../../components/verticalBar/VerticalBar";
-import { FormattedKeyData } from "../../models/formattedKeyDataModel";
-import { UserActivity } from "../../models/userActivityModel";
-import { UserMainData } from "../../models/userMainDataModel";
-import { UserAverageSession } from "../../models/userAverageSessionModel";
+import { FormattedKeyDataModel } from "../../models/formattedKeyDataModel";
+import { UserActivityModel } from "../../models/userActivityModel";
+import { UserMainDataModel } from "../../models/userMainDataModel";
+import { UserAverageSessionModel } from "../../models/userAverageSessionModel";
 import {
     getUserInfos,
     getUserActivity,
@@ -16,8 +12,16 @@ import {
     getUserPerformance,
 } from "../../services/services";
 import KeyData from "../../components/keyData/KeyData";
-import { UserPerformance } from "../../models/userPerformanceModel";
+import { UserPerformanceModel } from "../../models/userPerformanceModel";
+import ObjectifGraph from "../../components/objectif/ObjectifGraph";
+import PerformanceGraph from "../../components/performance/PerformanceGraph";
+import SessionGraph from "../../components/session/SessionGraph";
+import ActivityGraph from "../../components/activity/ActivityGraph";
 
+/**
+ * Render the main page (profil page)
+ * @returns {ReactElement}
+ */
 const User = () => {
     const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [isLoadingActivity, setIsLoadingActivity] = useState(true);
@@ -37,7 +41,7 @@ const User = () => {
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
-        //default value if null
+        //12 = default value if no user_id in URL 
         let value = params.user_id ?? 12;
 
         getMainData(value);
@@ -52,7 +56,7 @@ const User = () => {
      */
     const getMainData = async (userId) => {
         const dataFromFetch = await getUserInfos(userId);
-        const data = new UserMainData(dataFromFetch);
+        const data = new UserMainDataModel(dataFromFetch);
         setUserMainDatas(data);
         setIsLoadingUser(false);
         formatKeyData(data.keyData);
@@ -64,7 +68,7 @@ const User = () => {
      */
     const getActivityData = async (userId) => {
         const dataFromFetch = await getUserActivity(userId);
-        const data = new UserActivity(dataFromFetch);
+        const data = new UserActivityModel(dataFromFetch);
         setActivityDatas(data.sessions);
         setIsLoadingActivity(false);
     };
@@ -75,9 +79,7 @@ const User = () => {
      */
     const getSessionData = async (userId) => {
         const dataFromFetch = await getUserSession(userId);
-        const data = new UserAverageSession(dataFromFetch);
-        console.log(data);
-
+        const data = new UserAverageSessionModel(dataFromFetch);
         setSessionDatas(data.sessions);
         setIsLoadingSession(false);
     };
@@ -88,18 +90,24 @@ const User = () => {
      */
     const getPerformanceData = async (userId) => {
         const dataFromFetch = await getUserPerformance(userId);
-        const data = new UserPerformance(dataFromFetch);
+        const data = new UserPerformanceModel(dataFromFetch);
         setPerformanceDatas(data);
         setIsLoadingPerformance(false);
     };
 
     /**
-     * Format datas for right bar (calory, protein...) using state
+     * Format USER_MAIN_DATA.keyData datas (calory, protein...) in order to display
      * @param {Object} data USER_MAIN_DATAS.keyData
+     * @param {string} data.key 
+     * @param {string} data.label 
+     * @param {string} data.unit
+     * @param {string} data.img 
+     * @param {number} data.count 
+     * @param {string} data.classIcon 
      */
     const formatKeyData = (data) => {
         setCaloryDatas(
-            new FormattedKeyData(
+            new FormattedKeyDataModel(
                 "calorie",
                 "Calories",
                 "kCal",
@@ -109,7 +117,7 @@ const User = () => {
             )
         );
         setProteinDatas(
-            new FormattedKeyData(
+            new FormattedKeyDataModel(
                 "protein",
                 "Protéines",
                 "g",
@@ -119,7 +127,7 @@ const User = () => {
             )
         );
         setGlucidDatas(
-            new FormattedKeyData(
+            new FormattedKeyDataModel(
                 "carbohydrate",
                 "Glucides",
                 "g",
@@ -129,7 +137,7 @@ const User = () => {
             )
         );
         setLipidDatas(
-            new FormattedKeyData(
+            new FormattedKeyDataModel(
                 "lipid",
                 "Lipides",
                 "g",
@@ -156,7 +164,7 @@ const User = () => {
                             {isLoadingActivity ? (
                                 "Loading"
                             ) : (
-                                <Activity activityDatas={activityDatas} />
+                                <ActivityGraph activityDatas={activityDatas} />
                             )}
                         </div>
                         <div className="bottom-container">
@@ -164,14 +172,14 @@ const User = () => {
                                 {isLoadingSession ? (
                                     "Loading"
                                 ) : (
-                                    <Session sessionDatas={sessionDatas} />
+                                    <SessionGraph sessionDatas={sessionDatas} />
                                 )}
                             </div>
                             <div className="radar-container">
                                 {isLoadingPerformance ? (
                                     "Loading"
                                 ) : (
-                                    <Performance
+                                    <PerformanceGraph
                                         performanceDatas={performanceDatas}
                                     />
                                 )}
@@ -180,7 +188,7 @@ const User = () => {
                                 {isLoadingUser ? (
                                     "Loading"
                                 ) : (
-                                    <Objectif
+                                    <ObjectifGraph
                                         todayScore={userMainDatas.todayScore}
                                     />
                                 )}

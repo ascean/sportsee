@@ -8,11 +8,14 @@ import {
 } from "recharts";
 
 /**
- * Display RadarChart with performances
- * @param {Object} performanceDatas from USER_PERFORMANCE
- * @returns HTMLElement
+ * Generate RadarChart with performances
+ * @param {Object} performanceDatas USER_PERFORMANCE
+ * @param {number} performanceDatas.userId user code
+ * @param {Array.<{value:number, kind:number, label:string}>} performanceDatas.data Values for each performance
+ * @param {Array.<string>} performanceDatas.kind kind of performances
+ * @returns {ReactElement} RadarChart
  */
-const Performance = ({performanceDatas}) => {
+const PerformanceGraph = ({performanceDatas}) => {
 
     //example of performanceDatas
     // userId : 12
@@ -50,4 +53,4 @@ const Performance = ({performanceDatas}) => {
     );
 };
 
-export default Performance;
+export default PerformanceGraph;

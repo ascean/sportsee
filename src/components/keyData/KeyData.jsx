@@ -1,11 +1,12 @@
 import React from "react";
 
 /**
- * Display right section with calory, protein, lipid... elements
- * @param {Object} {datas} FormattedKeyData object from USER_MAIN_DATA.keyData
- * @returns HTMLElement 
+ * Render right section with calory, protein, lipid... elements
+ * @param {FormattedKeyDataModel} datas USER_MAIN_DATA.keyData
+ * @returns {ReactElement} LineChart 
  */
 const KeyData = ({ datas }) => {
+    
     return (
         <div className="keydata-item">
             <div className={`icon ${datas.classIcon}`}>
