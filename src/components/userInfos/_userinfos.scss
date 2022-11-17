@@ -1,3 +1,12 @@
+.userinfos-container {
+    min-height: 50px; //for error message
+    position: relative;
+}
+.right-container{
+    position: relative;
+    display: flex;
+}
+
 .name {
     color: red;
 }

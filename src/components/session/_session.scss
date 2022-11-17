@@ -1,14 +1,19 @@
 .session-container {
     width: 100%;
-    height: 260px;
+    height: $bottom-graph-height;
     background-color: #FF0000;
     border-radius: 5px;
     padding-top: 20px;
+    position: relative;
 
     .xAxis {
         & line {
             stroke: transparent;
         }
+    }
+    .xAxis {
+        transform: scale(0.90);
+        transform-origin: bottom;
     }
 
     .recharts-legend-wrapper {

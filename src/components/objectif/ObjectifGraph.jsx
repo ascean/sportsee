@@ -6,7 +6,7 @@ import {
 } from "recharts";
 
 /**
- * Generate RadialBarChart with USER_MAIN_DATA.todayScore
+ * Component RadialBarChart with USER_MAIN_DATA.todayScore
  * @param {number} todayScore User objectif score
  * @returns {ReactElement} RadialBarChart
  */

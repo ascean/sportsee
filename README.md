@@ -7,6 +7,16 @@ This project presents the first page of the Sportee application which will allow
 
 Minimum resolution : 1024 x 780px 
 
+## Prerequisites
+
+- nodeJS (version 16.14.2)
+
+- npm (version 8.5.0)
+
+- Visual Studio Code (version 1.73.1) or another code editor
+
+- git
+
 ## Technologies and Dependencies
 
 - Javascript
@@ -69,14 +79,18 @@ Minimum resolution : 1024 x 780px
 ```
 
 ## Run the project
+
 You need to run first backend then frontend
+
 #### BACKEND
+
 Start the server
 
 ```bash
   npm run start
 ```
 It will be running on port 3000
+
 #### FRONTEND
 
 Start the server
@@ -88,7 +102,11 @@ To this question "Something is already running on port 3000. Would you like to r
 
 Finally, open http://localhost:3001 to view the application in your browser. (3001 is your port number)
 
+## Display datas
 
+By default, user_id = 12 and datas are API datas
+
+### From API
 - Default datas :
 ```bash
   http://localhost:3001 
@@ -99,18 +117,33 @@ Finally, open http://localhost:3001 to view the application in your browser. (30
 ```bash
   http://localhost:3001/?user_id=18
 ```
+### From mock file
+- Default datas :
+```bash
+  http://localhost:3001/?from=mock 
+  or
+  http://localhost:3001/?user_id=12&from=mock 
+```
+- Others datas :
+```bash
+  http://localhost:3001/?user_id=18&from=mock
+```
 
 ## Document source code with JsDoc
+
 ### Installation
-```bash
-  npm jsdoc
-```
-### Running
+
+JsDoc is installed in devDependencies.
+
+### Generation
+
 ```bash
   npm run jsdoc
 ```
 ### Consulting
-Open the file : /docs/index.html
+
+Jsdoc files are generated in public folder. 
+You can access to jsdoc by using URL : http://localhost:3001/docs/index.html
 
 ## Authors
 

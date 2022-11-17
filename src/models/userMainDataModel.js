@@ -2,18 +2,8 @@ import { KeyDataModel } from "./keyDataModel";
 import { UserInfosModel } from "./userInfosModel";
 import PropTypes from "prop-types";
 
+//Model for userInfos, activityGraph, objectifGraph and keyDatas 
 export class UserMainDataModel {
-    /**
-     * Model for USER_MAIN_DATA
-     * called in USER
-     * calling UserInfosModel and KeyDataModel
-     * @param {Object} data
-     * @param {number} data.id User code
-     * @param {number} [data.score] User objectif score
-     * @param {number} data.todayScore User objectif score
-     * @param {UserInfosModel} data.userInfos User informations (firstname, lastname, age)
-     * @param {KeyDataModel} data.keyData User datas consum (calorie, protein, glucid, lipid)
-     */
     constructor(data) {
         this.id = data.id;
         if (data.score) {

@@ -1,23 +1,12 @@
 import React from 'react';
+import { ButtonModel } from '../../models/buttonModel';
 import VerticalButton from './VerticalButton';
 
 /**
- * Render the left and vertical bar
+ * Component for left and vertical bar
  * @returns {ReactElement} Vertical bar
  */
 const VerticalBar = () => {
-
-    class Button {
-    /**
-     * Create a button
-     * @param {string} alt attribute alt
-     * @param {string} img image source
-     */
-        constructor(alt, img) {
-            this.alt = alt;
-            this.img = img;
-        }
-    }
 
     /**
      * Create a new component with specifics alt attribute and img source 
@@ -25,7 +14,7 @@ const VerticalBar = () => {
      * @returns {Button}  
      */
     const constructButton = (type) => {
-        return (new Button(type, "/images/"+type+".png"))
+        return (new ButtonModel(type, "/images/"+type+".png"))
     };
 
     return (

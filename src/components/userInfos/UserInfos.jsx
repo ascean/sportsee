@@ -1,14 +1,14 @@
 import React from "react";
 
 /**
- * Render message with user Firstname
+ * Component message with user Firstname
  * @param {String} firstName User firstname
  * @returns {ReactElement} welcome message
 
  */
-const UserInfos = ({firstName}) => {
+const UserInfos = ({ firstName }) => {
     return (
-        <section className="user-infos">
+        <div>
             <h1>
                 <span>Bonjour </span>
                 <span className="name">{firstName}</span>
@@ -16,7 +16,7 @@ const UserInfos = ({firstName}) => {
             <p className="message">
                 Félicitations ! Vous avez explosé vos objectifs hier 👏
             </p>
-        </section>
+        </div>
     );
 };
 

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'; 
 
 /**
- * Render header navigation
+ * Component header navigation
  * @returns {ReactElement} Header navigation
  */
 const Header = () => {

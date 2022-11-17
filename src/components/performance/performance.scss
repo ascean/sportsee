@@ -1,10 +1,11 @@
 .radar-container {
     background-color: #282D30;
-    height: 260px;
+    height: $bottom-graph-height;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    position: relative;
 }
 .recharts-text {
     font-size:10px;

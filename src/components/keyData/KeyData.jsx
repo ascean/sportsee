@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Render right section with calory, protein, lipid... elements
+ * Component for right section with calory, protein, lipid... elements
  * @param {FormattedKeyDataModel} datas USER_MAIN_DATA.keyData
  * @returns {ReactElement} LineChart 
  */

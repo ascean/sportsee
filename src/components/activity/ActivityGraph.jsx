@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 /**
- * Render BarChart with USER_ACTIVITY.sessions 
+ * Component BarChart with USER_ACTIVITY.sessions 
  * @param {Array.<{day:number, kilogram:number, calories:number}>} activityDatas 
  * @returns {ReactElement} BarChart
  */
@@ -21,7 +21,7 @@ const ActivityGraph = ({ activityDatas }) => {
     activityDatas.map((data, index) => (data.day = index + 1));
 
     /**
-     * Render tooltip on BarChart hover
+     * Component tooltip on BarChart hover
      * @param {Object} props
      * @param {boolean} props.active
      * @param {Array.<{name:string, fill:string, dataKey:string, color:string, value:integer, payload:Object}>} props.payload
@@ -42,7 +42,6 @@ const ActivityGraph = ({ activityDatas }) => {
      */
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
-            console.log("tot", payload);
             return (
                 <div className="custom-tooltip-activity">
                     <p className="label">{`${payload[0].payload.kilogram}kg`}</p>
@@ -54,11 +53,11 @@ const ActivityGraph = ({ activityDatas }) => {
     };
 
     return (
-        <div>
+        <div width="100%" height={"100%"}>
             <h2>Activité quotidienne</h2>
             <BarChart
                 width={600}
-                height={220}
+                height={250}
                 data={activityDatas}
                 margin={{
                     top: 0,

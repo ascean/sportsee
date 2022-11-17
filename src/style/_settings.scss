@@ -8,3 +8,16 @@
     border: none;
     text-decoration: none;
 }
+html, body {
+    min-width: 1024px;
+    min-height: 780px;
+}
+
+$bottom-graph-height:240px;
+
+.recharts-container {
+    height: 80%;
+}
+.activity-container {
+    height:80%;
+}

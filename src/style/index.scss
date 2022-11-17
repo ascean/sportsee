@@ -1,5 +1,5 @@
 @import 'settings';
-@import '../pages/user/user';
+@import '../pages/profile/profile';
 @import '../pages/error/error';
 @import '../components/header/header';
 @import '../components/verticalbar/verticalbar';
@@ -9,3 +9,4 @@
 @import '../components/performance/performance.scss';
 @import '../components/objectif/objectif.scss';
 @import '../components/userInfos/userinfos';
+@import '../components/nodata/nodata';
