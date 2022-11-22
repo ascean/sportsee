@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 // Format datas from keyData bar, 
-export class FormattedKeyDataModel {
+export class FormattedNutrientModel {
     constructor(key, label, unit, img, count, classIcon) {
         this.key    = key;
         this.label  = label;
@@ -12,7 +12,7 @@ export class FormattedKeyDataModel {
     }
 }
 
-FormattedKeyDataModel.propTypes = {
+FormattedNutrientModel.propTypes = {
     key:    PropTypes.string,
     label:  PropTypes.string,
     unit:   PropTypes.string,

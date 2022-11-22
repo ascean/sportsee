@@ -10,5 +10,5 @@ export class ButtonModel {
 
 ButtonModel.propTypes = {
     alt: PropTypes.string,
-    img: PropTypes.number,
+    img: PropTypes.string,
 };

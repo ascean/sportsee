@@ -1,4 +1,4 @@
-import { KeyDataModel } from "./keyDataModel";
+import { NutrientModel } from "./nutrientModel";
 import { UserInfosModel } from "./userInfosModel";
 import PropTypes from "prop-types";
 
@@ -13,7 +13,7 @@ export class UserMainDataModel {
             this.todayScore = data.todayScore;
         }
         this.userInfos = new UserInfosModel(data.userInfos);
-        this.keyData    = new KeyDataModel(data.keyData);
+        this.keyData    = new NutrientModel(data.keyData);
     }
 }
 
@@ -22,5 +22,5 @@ UserMainDataModel.propTypes = {
     todayScore: PropTypes.number,
     score:      PropTypes.number,
     userInfos:  PropTypes.instanceOf(UserInfosModel),
-    keyData:    PropTypes.instanceOf(KeyDataModel),
+    keyData:    PropTypes.instanceOf(NutrientModel),
 };

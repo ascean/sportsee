@@ -1,6 +1,10 @@
 import React from 'react';
 import { ButtonModel } from '../../models/buttonModel';
 import VerticalButton from './VerticalButton';
+import cycling from '../verticalBar/assets/images/cycling.png'
+import weightlifting from '../verticalBar/assets/images/weightlifting.png'
+import yoga from '../verticalBar/assets/images/yoga.png'
+import swimming from '../verticalBar/assets/images/swimming.png'
 
 /**
  * Component for left and vertical bar
@@ -8,22 +12,13 @@ import VerticalButton from './VerticalButton';
  */
 const VerticalBar = () => {
 
-    /**
-     * Create a new component with specifics alt attribute and img source 
-     * @param {string} type yoga, natation, cyclisme or halterophilie
-     * @returns {Button}  
-     */
-    const constructButton = (type) => {
-        return (new ButtonModel(type, "/images/"+type+".png"))
-    };
-
     return (
         <section className='bar-container'>
             <ul>
-                <VerticalButton buttonDatas={constructButton("yoga")}/>
-                <VerticalButton buttonDatas={constructButton("natation")}/>
-                <VerticalButton buttonDatas={constructButton("cyclisme")}/>
-                <VerticalButton buttonDatas={constructButton("halterophilie")}/>
+                <VerticalButton buttonDatas={new ButtonModel("yoga", yoga)}/>
+                <VerticalButton buttonDatas={new ButtonModel("swimming", swimming)}/>
+                <VerticalButton buttonDatas={new ButtonModel("cyclisme", cycling)}/>
+                <VerticalButton buttonDatas={new ButtonModel("weightlifting", weightlifting)}/>
             </ul>
             <p>
                 Copyright, SportSee 2020

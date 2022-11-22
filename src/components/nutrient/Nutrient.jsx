@@ -2,24 +2,24 @@ import React from "react";
 
 /**
  * Component for right section with calory, protein, lipid... elements
- * @param {FormattedKeyDataModel} datas USER_MAIN_DATA.keyData
+ * @param {FormattedNutrientModel} datas USER_MAIN_DATA.keyData
  * @returns {ReactElement} LineChart 
  */
-const KeyData = ({ datas }) => {
+const Nutrient = ({ datas }) => {
     
     return (
-        <div className="keydata-item">
+        <div className="nutrient-item">
             <div className={`icon ${datas.classIcon}`}>
                 <img src={datas.img} alt="" />
             </div>
-            <div className="keydata-values">
-                <p className="keydata-data">
+            <div className="nutrient-values">
+                <p className="nutrient-data">
                     {datas.count} {datas.unit}
                 </p>
-                <p className="keydata-label">{datas.label}</p>
+                <p className="nutrient-label">{datas.label}</p>
             </div>
         </div>
     );
 };
 
-export default KeyData;
+export default Nutrient;

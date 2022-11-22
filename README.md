@@ -111,22 +111,22 @@ By default, user_id = 12 and datas are API datas
 ```bash
   http://localhost:3001 
   or
-  http://localhost:3001/?user_id=12 
+  http://localhost:3001/user/?user_id=12 
 ```
 - Others datas :
 ```bash
-  http://localhost:3001/?user_id=18
+  http://localhost:3001/user/?user_id=18
 ```
 ### From mock file
 - Default datas :
 ```bash
   http://localhost:3001/?from=mock 
   or
-  http://localhost:3001/?user_id=12&from=mock 
+  http://localhost:3001/user/?user_id=12&from=mock 
 ```
 - Others datas :
 ```bash
-  http://localhost:3001/?user_id=18&from=mock
+  http://localhost:3001/user/?user_id=18&from=mock
 ```
 
 ## Document source code with JsDoc
@@ -145,7 +145,7 @@ JsDoc is installed in devDependencies.
 Jsdoc files are generated in public folder. 
 You can access to jsdoc by using URL : http://localhost:3001/docs/index.html
 
-## Authors
+## Author
 
 - Sandrine
 

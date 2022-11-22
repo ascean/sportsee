@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import UserInfos from "../../components/userInfos/UserInfos";
 import VerticalBar from "../../components/verticalBar/VerticalBar";
-import KeyData from "../../components/keyData/KeyData";
+import Nutrient from "../../components/nutrient/Nutrient";
 import NoData from "../../components/noData/NoData";
 
 //Models
-import { FormattedKeyDataModel } from "../../models/formattedKeyDataModel";
+import { FormattedNutrientModel } from "../../models/formattedNutrientModel";
 import { UserActivityModel } from "../../models/userActivityModel";
 import { UserMainDataModel } from "../../models/userMainDataModel";
 import { UserAverageSessionModel } from "../../models/userAverageSessionModel";
@@ -19,7 +19,12 @@ import {
     getUserSession,
     getUserPerformance,
 } from "../../services/servicesAPI";
-import { getUserActivityByMock, getUserInfosByMock, getUserPerformanceByMock, getUserSessionByMock } from "../../services/servicesMock";
+import {
+    getUserActivityByMock,
+    getUserInfosByMock,
+    getUserPerformanceByMock,
+    getUserSessionByMock
+} from "../../services/servicesMock";
 
 //Graphs
 import ObjectifGraph from "../../components/objectif/ObjectifGraph";
@@ -27,6 +32,11 @@ import PerformanceGraph from "../../components/performance/PerformanceGraph";
 import SessionGraph from "../../components/session/SessionGraph";
 import ActivityGraph from "../../components/activity/ActivityGraph";
 
+//Icons
+import caloryIcon from '../../components/nutrient/assets/icons/calory.png'
+import proteinIcon from '../../components/nutrient/assets/icons/protein.png'
+import carbohydrateIcon from '../../components/nutrient/assets/icons/carbohydrate.png'
+import lipidIcon from '../../components/nutrient/assets/icons/lipid.png'
 
 /**
  * Render the main page (profil page)
@@ -52,6 +62,7 @@ const Profile = () => {
     const [proteinDatas, setProteinDatas]   = useState(null);
     const [glucidDatas, setGlucidDatas]     = useState(null);
     const [lipidDatas, setLipidDatas]       = useState(null);
+    
 
     useEffect(() => {
         //URL datas gestion
@@ -74,6 +85,7 @@ const Profile = () => {
             getPerformanceDataAPI(userId);
         } 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     //********************USER_MAIN_DATA***********************
@@ -83,7 +95,7 @@ const Profile = () => {
      * @param {number} data.id User code
      * @param {UserInfosModel} data.userInfos User informations (firstname, lastname, age)
      * @param {number} data.todayScore User objectif score
-     * @param {KeyDataModel} data.keyData User datas consum (calorie, protein, glucid, lipid)
+     * @param {NutrientModel} data.keyData User datas consum (calorie, protein, glucid, lipid)
      * @example
      * {"id": 12,
         "userInfos": {"firstName": "Karl", "lastName": "Dovineau", "age": 31},
@@ -98,11 +110,11 @@ const Profile = () => {
             const mainData = new UserMainDataModel(datas);
             setUserMainDatas(mainData);
             setIsLoadingUser(false);
-            formatKeyData(mainData.keyData);
+            formatNutrientData(mainData.keyData);
             setIsErrorUser(false);
         }
     }
-
+    
     /**
      * get datas from mock json file /  USER_MAIN_DATA section
      * @param {integer} userId User code
@@ -111,7 +123,7 @@ const Profile = () => {
         const datas = getUserInfosByMock(userId);
         processMainData(datas)
     };
-
+    
     /**
      * get datas from API /  USER_MAIN_DATA section
      * @param {integer} userId User code
@@ -286,29 +298,30 @@ const Profile = () => {
      * @param {number} data.count
      * @param {string} data.classIcon
      */
-    const formatKeyData = (data) => {
+    const formatNutrientData = (data) => {
         setCaloryDatas(
-            new FormattedKeyDataModel(
-                "calorie", "Calories", "kCal", `/icons/calorie.png`, data.calorieCount, "calorie-icon"
+            new FormattedNutrientModel(
+                "calorie", "Calories", "kCal", caloryIcon, data.calorieCount, "calorie-icon"
             )
         );
         setProteinDatas(
-            new FormattedKeyDataModel(
-                "protein", "Protéines", "g", `/icons/protein.png`, data.proteinCount, "protein-icon"
+            new FormattedNutrientModel(
+                "protein", "Protéines", "g", proteinIcon, data.proteinCount, "protein-icon"
             )
         );
         setGlucidDatas(
-            new FormattedKeyDataModel(
-                "carbohydrate", "Glucides", "g", `/icons/carbohydrate.png`, data.carbohydrateCount, "glucid-icon"
+            new FormattedNutrientModel(
+                "carbohydrate", "Glucides", "g", carbohydrateIcon, data.carbohydrateCount, "glucid-icon"
             )
         );
         setLipidDatas(
-            new FormattedKeyDataModel(
-                "lipid", "Lipides", "g", `/icons/lipid.png`, data.lipidCount, "lipid-icon"
+            new FormattedNutrientModel(
+                "lipid", "Lipides", "g", lipidIcon, data.lipidCount, "lipid-icon"
             )
         );
     };
 
+    
     return (
         <main>
             <VerticalBar />
@@ -376,11 +389,11 @@ const Profile = () => {
                         ) : isLoadingUser ? (
                             "Loading"
                         ) : (
-                            <div className="keydata-container">
-                                <KeyData datas={caloryDatas} />
-                                <KeyData datas={proteinDatas} />
-                                <KeyData datas={glucidDatas} />
-                                <KeyData datas={lipidDatas} />
+                            <div className="nutrient-data-container">
+                                <Nutrient datas={caloryDatas} />
+                                <Nutrient datas={proteinDatas} />
+                                <Nutrient datas={glucidDatas} />
+                                <Nutrient datas={lipidDatas} />
                             </div>
                         )}
                     </article>

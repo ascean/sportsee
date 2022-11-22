@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 //Model for USER_MAIN_DATA.keyData, 
-export class KeyDataModel{
+export class NutrientModel{
     constructor(data) {
         this.calorieCount       = data.calorieCount;
         this.proteinCount       = data.proteinCount;
@@ -10,7 +10,7 @@ export class KeyDataModel{
     }
 }
 
-KeyDataModel.propTypes = {
+NutrientModel.propTypes = {
     calorieCount:       PropTypes.number,
     proteinCount:       PropTypes.number,
     carbohydrateCount:  PropTypes.number,

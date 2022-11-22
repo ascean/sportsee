@@ -1,9 +1,9 @@
-.keydata-container {
+.nutrient-data-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
-    .keydata-item {
+    .nutrient-item {
         display: flex;
         align-items: center;
         background-color: #FBFBFB;
@@ -38,12 +38,12 @@
             padding: 20px;
         }
 
-        .keydata-values {
-            .keydata-data {
+        .nutrient-values {
+            .nutrient-data {
                 font-size: 16px;
                 font-weight: bold;
             }
-            .keydata-label {
+            .nutrient-label {
 
                 font-size: 12px;
             }

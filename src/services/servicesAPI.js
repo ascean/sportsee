@@ -8,11 +8,11 @@ import axios from "axios";
  */
 export async function getUserInfos(userId) {
     try {
-        const url = `${API_URL}/${userId}`;
+        const url = `${API_URL}/user/${userId}`;
         const response = await axios.get(url);
         return response.data.data;
     } catch (error) {
-        console.log(error.response.status);
+        return null
     }
 }
 
@@ -23,11 +23,11 @@ export async function getUserInfos(userId) {
  */
 export async function getUserActivity(userId) {
     try {
-        const url = `${API_URL}/${userId}/activity`;
+        const url = `${API_URL}/user/${userId}/activity`;
         const response = await axios.get(url);
         return response.data.data;
     } catch (error) {
-        console.log(error.message);
+        return null
     }
 }
 
@@ -38,11 +38,11 @@ export async function getUserActivity(userId) {
  */
 export async function getUserSession(userId) {
     try {
-        const url = `${API_URL}/${userId}/average-sessions`;
+        const url = `${API_URL}/user/${userId}/average-sessions`;
         const response = await axios.get(url);
         return response.data.data;
     } catch (error) {
-        console.log(error.message);
+        return null
     }
 }
 
@@ -53,10 +53,10 @@ export async function getUserSession(userId) {
  */
 export async function getUserPerformance(userId) {
     try {
-        const url = `${API_URL}/${userId}/performance`;
+        const url = `${API_URL}/user/${userId}/performance`;
         const response = await axios.get(url);
         return response.data.data;
     } catch (error) {
-        console.log(error.message);
+        return null
     }
 }
